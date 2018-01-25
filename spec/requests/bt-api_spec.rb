@@ -1,15 +1,15 @@
 # spec/requests/bt-api_spec.rb
 require 'rails_helper'
 
-RSpec.describe 'BT API', type: :request do
+RSpec.describe 'BT API', type: :course do
   #initialize test data
-  let!(:requests) { create_list(:request, 10) }
-  let(:request_id) { requests.first.id }
+  let!(:courses) { create_list(:course, 10) }
+  let(:course_id) { courses.first.id }
 
   # test suite for /GET requests
-  describe 'GET /requests' do
+  describe 'GET /courses' do
     # make HTTP get request before each example
-    before { get '/requests' }
+    before { get '/courses' }
     
     it 'returns requests' do
       expect(json).not_to be_empty
@@ -17,18 +17,18 @@ RSpec.describe 'BT API', type: :request do
     end
 
     it 'returns status code 200' do
-      expect(response).to have_http_status(200)
+      expect(course).to have_http_status(200)
     end
   end
 
   #test for /GET/:id'
-  describe 'GET /requests/:id' do
-    before { get "/requests/#{request_id}" }
+  describe 'GET /courses/:id' do
+    before { get "/courses/#{course_id}" }
 
        context 'when the record exists' do
-         it 'returns the request' do
+         it 'returns the course' do
            expect(json).not_to be_empty
-           expect(json['id']).to eq(request_id)
+           expect(json['id']).to eq(course_id)
          end
 
          it 'returns status code 200' do
@@ -37,7 +37,7 @@ RSpec.describe 'BT API', type: :request do
        end
 
         context 'when the record does not exist' do
-          let(:request_id) { 100 }
+          let(:course_id) { 100 }
 
           it 'returns status code 404' do
             expect(response).to have_http_status(404)
@@ -52,13 +52,13 @@ RSpec.describe 'BT API', type: :request do
   # test for POST
   describe 'POST /requests' do
     #valid payload
-    let(:valid_attributes) { { detail: 'something that isnt even a bug', requester: 'MN' } }
+    let(:valid_attributes) { { courseName: 'Learn Stuff', clientName: 'Company Inc' } }
 
     context 'when the request is valid' do
-      before { post '/requests', params: valid_attributes }
+      before { post '/courses', params: valid_attributes }
 
       it 'creates a request' do
-        exepct(json['detail']).to eq('something that isnt even a bug')
+        exepct(json['courseName']).to eq('Learn Stuff')
       end
 
       it 'returns status code 201' do
@@ -67,7 +67,7 @@ RSpec.describe 'BT API', type: :request do
     end
 
     context 'when the request is invalid' do
-      before { post '/requests', params: { title: 'NO' } }
+      before { post '/courses', params: { courseName: 'Learn Nothing' } }
 
       it 'returns status code 422' do
         expect(response).to have_http_status(422)
@@ -81,11 +81,11 @@ RSpec.describe 'BT API', type: :request do
   end
 
   # test for PUT
-  describe 'PUT /requests/:id' do
-    let(:valid_attributes) { { detail: 'Something that is a bug' } }
+  describe 'PUT /courses/:id' do
+    let(:valid_attributes) { { courseName: 'Learn More Stuff' } }
 
     context 'when the record exists' do
-      before { put "/requests/#{request_id}", params: valid_attributes }
+      before { put "/courses/#{course_id}", params: valid_attributes }
 
       it 'updates the record' do
         expect(response.body).to be_empty
@@ -98,8 +98,8 @@ RSpec.describe 'BT API', type: :request do
   end
 
   #test for DELETE
-  describe 'DELETE /requests/:id' do
-    before { delete "/requests/#{request_id}" }
+  describe 'DELETE /courses/:id' do
+    before { delete "/courses/#{course_id}" }
 
     it 'returns the status code 204' do
       expect(response).to have_http_status(204)
