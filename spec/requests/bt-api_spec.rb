@@ -2,7 +2,7 @@
 require 'rails_helper'
 require 'faker'
 
-RSpec.describe 'BT API', type: :course do
+RSpec.describe 'course', type: :controller do
   #initialize test data
   let!(:course) { create_list(:course, 10) }
   let(:course_id) { courses.first.id }

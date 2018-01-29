@@ -8,6 +8,5 @@ RSpec.describe Course, type: :model do
   # check for columns and titles
   it { should validate_presence_of(:courseName) }
   it { should validate_presence_of(:clientName) }
-  it { should validate_presence_of(:accessed) }
 
 end
