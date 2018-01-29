@@ -1,9 +1,10 @@
 # spec/requests/bt-api_spec.rb
 require 'rails_helper'
+require 'faker'
 
 RSpec.describe 'BT API', type: :course do
   #initialize test data
-  let!(:courses) { create_list(:course, 10) }
+  let!(:course) { create_list(:course, 10) }
   let(:course_id) { courses.first.id }
 
   # test suite for /GET requests

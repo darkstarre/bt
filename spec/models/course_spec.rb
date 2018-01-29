@@ -6,8 +6,8 @@ RSpec.describe Course, type: :model do
   it { should have_many(:requests).dependent(:destroy) }
   # validations tests
   # check for columns and titles
-  it { should validate_presence_of(:name) }
+  it { should validate_presence_of(:courseName) }
   it { should validate_presence_of(:clientName) }
-  it { should validate_presence_of(:last_accessed) }
+  it { should validate_presence_of(:accessed) }
 
 end

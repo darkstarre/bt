@@ -1,9 +1,9 @@
 class Course < ApplicationRecord
-  attr_accessor :name, :clientName, :last_accessed
+  attr_accessor :courseName, :clientName, :last_accessed, :created, :modified 
 
   # relationships
   has_many :requests, dependent: :destroy
 
   # validation
-  validates_presence_of :name, :clientName, :last_accessed
+  validates_presence_of :courseName, :clientName, :last_accessed, :created, :modified
 end

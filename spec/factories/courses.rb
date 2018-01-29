@@ -1,7 +1,12 @@
+require 'faker'
+
 FactoryBot.define do
-  factory :courses do
-    name {Faker::Lorem.word}
+  factory :course do
+    courseName {Faker::Lorem.word}
     clientName {Faker::Lorem.word}
-    last_accessed {Faker::Number.number(3).to_i.days}
+    accessed {Faker::Number.number(3).to_i.days}
+    modified {Faker::Date.backward}
+    created_at {Faker::Date.backward}
+    updated_at{Faker::Date.backward}
   end
 end

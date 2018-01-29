@@ -15,10 +15,10 @@ ActiveRecord::Schema.define(version: 20180118200252) do
   create_table "courses", force: :cascade do |t|
     t.string "courseName"
     t.string "clientName"
-    t.datetime "accessed"
+    t.datetime "last_accessed"
     t.datetime "modified"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created", null: false
+    t.datetime "updated", null: false
   end
 
   create_table "employee_courses", force: :cascade do |t|
